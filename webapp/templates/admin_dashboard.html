@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+{% endblock %}
+
+{% block top_actions %}
+<a class="btn btn-outline" href="{{ url_for('logout') }}">
+  <i class="fas fa-sign-out-alt"></i> Đăng xuất
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="center-page">
+<div class="center-wrap">
+<div class="card">
+  <h1><i class="fas fa-cogs"></i> Trang quản trị</h1>
+  <div class="dashboard-links">
+    <a class="btn btn-primary" href="{{ url_for('admin_students') }}">
+      <i class="fas fa-user-graduate"></i> Quản lý Sinh viên
+    </a>
+    <a class="btn btn-primary" href="{{ url_for('admin_courses') }}">
+      <i class="fas fa-book"></i> Quản lý Môn học
+    </a>
+  </div>
+</div>
+</div>
+</div>
+{% endblock %}

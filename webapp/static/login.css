@@ -1,0 +1,80 @@
+/* Giữ nền đẹp nhưng KHÔNG làm body flex (tránh phá header/footer) */
+body{
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  margin: 0;
+}
+
+/* Căn giữa nội dung TRONG main.page */
+.page{
+  min-height: calc(100vh - 120px); /* trừ xấp xỉ header + footer */
+  display: flex;
+  justify-content: center;  /* căn giữa trái-phải */
+  align-items: center;      /* căn giữa trên-dưới (nếu muốn) */
+  padding: 24px;
+}
+
+/* Card / form */
+.login-container,
+.card{
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.14);
+}
+
+/* Nếu bạn dùng layout mới dạng 2 cột thì vẫn OK,
+   còn nếu bạn dùng card đơn như code login.html bạn gửi thì vẫn OK */
+
+/* Form styles */
+.login-form .form-group{
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.login-form label{
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.login-form input{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 10px;
+  border: 1px solid #d7dde6;
+  outline: none;
+  font-size: 14px;
+  background: #f8fafc;
+}
+
+.login-form input:focus{
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 3px rgba(74,144,226,0.18);
+  background: #fff;
+}
+
+.login-form button{
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #4A90E2;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.login-form button:hover{
+  background: #357ABD;
+  transform: translateY(-1px);
+}
+
+.error-msg{
+  margin-top: 12px;
+  color: #b91c1c;
+  font-size: 14px;
+  font-weight: 700;
+}

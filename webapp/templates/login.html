@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+{% set full_width = false %}
+
+{% block title %}Đăng nhập{% endblock %}
+
+{% block body_class %}page-login{% endblock %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+<style>
+  /* Wrapper */
+  .login-wrap{
+    max-width: 1080px;
+    margin: 26px auto;
+    padding: 0 14px;
+  }
+
+  /* Main card */
+  .login-shell{
+    display:grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 16px;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 18px 50px rgba(0,0,0,.08);
+    background: #fff;
+  }
+
+  /* Left hero */
+  .login-hero{
+    padding: 26px;
+    background:
+      radial-gradient(1200px 500px at 10% 10%, rgba(11,94,215,.18), transparent 55%),
+      radial-gradient(900px 400px at 90% 0%, rgba(14,165,233,.18), transparent 55%),
+      linear-gradient(135deg, rgba(11,94,215,.10), rgba(8,66,152,.06));
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+
+  .brand{
+    display:flex;
+    gap: 12px;
+    align-items:center;
+  }
+  .brand img{
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    background:#fff;
+    border: 1px solid var(--border);
+    padding: 6px;
+  }
+  .brand h2{
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  .brand p{
+    margin: 4px 0 0 0;
+    color: var(--muted);
+  }
+
+  .hero-title{
+    margin: 18px 0 8px 0;
+    font-size: 30px;
+    line-height: 1.15;
+  }
+  .hero-desc{
+    margin: 0;
+    color: var(--muted);
+    max-width: 520px;
+  }
+
+  .hero-list{
+    margin: 14px 0 0 0;
+    padding-left: 18px;
+    color: var(--text);
+  }
+  .hero-list li{ margin: 6px 0; }
+
+  .demo-box{
+    margin-top: 14px;
+    padding: 12px 14px;
+    background:#fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+  }
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 10px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background: #fff;
+    font-weight: 600;
+    margin-right: 8px;
+    margin-top: 8px;
+  }
+
+  /* Right form */
+  .login-form-col{
+    padding: 26px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .login-card{
+    width: 100%;
+    max-width: 380px;
+  }
+  .login-card h1{
+    margin: 0 0 10px 0;
+    font-size: 26px;
+  }
+  .login-sub{
+    margin: 0 0 16px 0;
+    color: var(--muted);
+  }
+
+  .form-group label{
+    display:block;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .form-group input{
+    width: 100%;
+    padding: 11px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    outline: none;
+    background: #fff;
+  }
+  .form-group input:focus{
+    border-color: rgba(11,94,215,.55);
+    box-shadow: 0 0 0 4px rgba(11,94,215,.12);
+  }
+
+  .btn-wide{
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    font-weight: 800;
+    margin-top: 6px;
+  }
+
+  .error-msg{
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(239,68,68,.35);
+    background: rgba(239,68,68,.08);
+    color: #b91c1c;
+    font-weight: 700;
+  }
+
+  .mini-help{
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  @media(max-width: 920px){
+    .login-shell{ grid-template-columns: 1fr; }
+    .login-hero{ border-right: none; border-bottom: 1px solid var(--border); }
+    .login-form-col{ padding-top: 18px; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-page">
+<div class="login-wrap">
+  <div class="login-shell">
+
+    <!-- LEFT: INTRO -->
+    <section class="login-hero">
+      <div class="brand">
+        <!-- Nếu bạn có logo trong static, sửa đúng tên file: logo_hcmue.png chẳng hạn -->
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="HCMUE logo"
+             onerror="this.style.display='none'">
+        <div>
+          <h2>ĐH Sư phạm TP.HCM</h2>
+          <p>Hệ thống gợi ý khóa học (FTPComplex)</p>
+        </div>
+      </div>
+
+      <h3 class="hero-title">Đăng nhập để xem gợi ý môn học phù hợp</h3>
+      <p class="hero-desc">
+        Hệ thống hỗ trợ sinh viên lựa chọn học phần dựa trên lịch sử học tập và
+        góc nhìn thời gian linh hoạt của mô hình <strong>FTPComplex</strong>.
+      </p>
+
+      <ul class="hero-list">
+        <li>Trang sinh viên: tổng quan & danh sách gợi ý Top-K</li>
+        <li>Giải thích gợi ý: tăng minh bạch, dễ thuyết trình</li>
+        <li>Đồ thị học tập: trực quan hoá quan hệ môn học</li>
+      </ul>
+
+      <div class="demo-box">
+        <strong>Mẹo đăng nhập nhanh (demo):</strong>
+        <div class="mini-help" style="margin-top:6px;">
+          Nếu bạn đã thay dữ liệu CSV mới: thông thường <b>User ID</b> = <b>tên sinh viên</b>,
+          <b>Password</b> = <b>MSSV</b>. Bạn có thể mở <code>data/students.csv</code> để lấy 1 dòng bất kỳ.
+        </div>
+        <div>
+          <span class="pill"><i class="fas fa-user"></i> User ID: <span style="opacity:.9;">(student id)</span></span>
+          <span class="pill"><i class="fas fa-id-card"></i> Password: <span style="opacity:.9;">(123456)</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT: FORM -->
+    <section class="login-form-col">
+      <div class="login-card">
+        <h1><i class="fas fa-key"></i> Đăng nhập</h1>
+        <p class="login-sub">Vui lòng nhập thông tin để tiếp tục.</p>
+
+        <form method="POST" class="login-form" autocomplete="on">
+          <div class="form-group" style="margin-bottom:12px;">
+            <label for="user_id"><i class="fas fa-user"></i> User ID</label>
+            <input id="user_id" type="text" name="user_id" placeholder="VD: 24000001" required>
+          </div>
+
+          <div class="form-group" style="margin-bottom:8px;">
+            <label for="password"><i class="fas fa-lock"></i> Password</label>
+            <input id="password" type="password" name="password" placeholder="VD: 123456" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-wide">
+            <i class="fas fa-sign-in-alt"></i> Đăng nhập
+          </button>
+        </form>
+
+        {% if error %}
+          <div class="error-msg">{{ error }}</div>
+        {% endif %}
+      </div>
+    </section>
+
+  </div>
+</div>
+</div>
+{% endblock %}

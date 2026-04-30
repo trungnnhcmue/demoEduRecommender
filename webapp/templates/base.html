@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}Hệ thống gợi ý khóa học{% endblock %}</title>
+
+  <!-- Font Awesome (bạn đang dùng ở mọi trang) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Theme chung -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+  <header class="topbar">
+    <div class="topbar__inner">
+      <div class="brand">
+        <img class="brand__logo" src="{{ url_for('static', filename='img/hcmue-logo.png') }}" alt="Logo">
+        <div class="brand__text">
+          <div class="brand__school">ĐH Sư phạm TP.HCM</div>
+          <div class="brand__app">Hệ thống gợi ý khóa học (FTPComplex) theo đề tài B2024-SPS-08</div>
+        </div>
+      </div>
+
+      <div class="topbar__actions">
+        {% block top_actions %}{% endblock %}
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <span>© {{ 2026 }} ĐH Sư phạm TP.HCM • Hệ gợi ý khóa học dựa trên FTPComplex</span>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block title %}Giải thích gợi ý{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+  .hero-mini{
+    padding: 18px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff, var(--primary-soft));
+    border: 1px solid var(--border);
+  }
+
+  .kpi-grid{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:14px;
+    margin-top:14px;
+  }
+  .col-6{ grid-column: span 6; }
+  .col-12{ grid-column: span 12; }
+  @media(max-width:900px){
+    .col-6{ grid-column: span 12; }
+  }
+
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--border);
+    font-weight:600;
+    color:var(--primary-2);
+  }
+
+  .explain-box{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
+    background:#fff;
+  }
+
+  details{
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:#fff;
+    margin-top:10px;
+    overflow:hidden;
+  }
+  summary{
+    list-style:none;
+    cursor:pointer;
+    padding:14px 16px;
+    font-weight:700;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  summary::-webkit-details-marker{ display:none; }
+  .details-body{ padding:0 16px 16px 16px; color:var(--text); }
+  .muted{ color: var(--muted); }
+
+  .why-list{
+    margin:10px 0 0 0;
+    padding-left:18px;
+  }
+  .why-list li{ margin:6px 0; }
+
+  .tag{
+    background: var(--primary-soft);
+    color: var(--primary-2);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    display:inline-block;
+  }
+
+  .note{
+    border-left:4px solid var(--primary);
+    padding:12px;
+    background:#fff;
+    border-radius:12px;
+    border:1px solid var(--border);
+    margin-top:12px;
+  }
+</style>
+{% endblock %}
+
+{% block top_actions %}
+<a class="btn btn-outline" href="{{ url_for('student_dashboard') }}">
+  <i class="fas fa-arrow-left"></i> Quay lại
+</a>
+{% endblock %}
+
+{% block content %}
+
+<section class="card hero-mini">
+  <h1 style="margin:0 0 8px 0;">
+    <i class="fas fa-circle-question"></i>
+    Giải thích gợi ý môn học
+  </h1>
+
+  <p class="muted" style="margin:0;">
+    Trang này giúp tăng <strong>tính minh bạch</strong> và <strong>khả năng diễn giải</strong> của hệ thống:
+    vì sao hệ thống đề xuất các môn học dưới đây cho sinh viên.
+  </p>
+
+  <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+    <span class="pill"><i class="fas fa-user-graduate"></i> {{ student.name }}</span>
+    <span class="pill"><i class="fas fa-layer-group"></i> Ngành: {{ student.major }}</span>
+    <span class="pill"><i class="fas fa-calendar"></i> Năm: {{ student.year }}</span>
+  </div>
+</section>
+
+<div class="kpi-grid">
+  <section class="card col-6">
+    <h2 style="margin:0 0 10px 0;"><i class="fas fa-diagram-project"></i> Nguyên tắc giải thích</h2>
+    <div class="explain-box">
+      <ol class="muted" style="margin:0; padding-left:18px;">
+        <li><strong>Tương tác đồ thị</strong>: gợi ý dựa trên cấu trúc quan hệ sinh viên–môn học.</li>
+        <li><strong>Góc nhìn thời gian</strong>: ưu tiên các quan hệ gần theo học kỳ/năm học (FTPComplex).</li>
+        <li><strong>Nhúng (Embedding)</strong>: môn có embedding gần với sinh viên sẽ được ưu tiên.</li>
+      </ol>
+    </div>
+    <div class="note">
+      <strong>Lưu ý:</strong> Đây là giải thích ở mức hệ thống (system-level), nhằm hỗ trợ hiểu và thảo luận với cố vấn học tập.
+    </div>
+  </section>
+
+  <section class="card col-6">
+    <h2 style="margin:0 0 10px 0;"><i class="fas fa-list-check"></i> Các môn đang được gợi ý</h2>
+
+    {% if explained_recommendations and explained_recommendations|length > 0 %}
+  {% for r in explained_recommendations %}
+    <details {% if loop.index == 1 %}open{% endif %}>
+      <summary>
+        <span><i class="fas fa-wand-magic-sparkles"></i> {{ loop.index }}. {{ r.course }}</span>
+        <span class="tag">Giải thích</span>
+      </summary>
+
+      <div class="details-body">
+        <p class="muted" style="margin:0 0 8px 0;">
+          {{ r.intro }}
+        </p>
+
+        <ul class="why-list">
+          {% for reason in r.reasons %}
+            <li>{{ reason }}</li>
+          {% endfor %}
+        </ul>
+
+        <p class="muted" style="margin:10px 0 0 0;">
+          Gợi ý sử dụng: xem mô tả môn học, điều kiện tiên quyết,
+          và trao đổi với cố vấn học tập trước khi đăng ký.
+        </p>
+      </div>
+    </details>
+  {% endfor %}
+{% else %}
+  <p class="muted">Chưa có gợi ý để giải thích.</p>
+{% endif %}
+
+
+    <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn btn-primary" href="{{ url_for('student_graph') }}">
+        <i class="fas fa-chart-network"></i> Xem đồ thị học tập
+      </a>
+      <a class="btn btn-secondary" href="{{ url_for('model_page') }}">
+        <i class="fas fa-brain"></i> Xem mô hình FTPComplex
+      </a>
+    </div>
+  </section>
+
+  <section class="card col-12">
+    <h2 style="margin:0 0 10px 0;"><i class="fas fa-shield-halved"></i> Gợi ý sử dụng kết quả</h2>
+    <div class="explain-box">
+      <ul class="muted" style="margin:0; padding-left:18px;">
+        <li>Kết quả gợi ý mang tính tham khảo; ưu tiên phù hợp chương trình đào tạo và tiến độ cá nhân.</li>
+        <li>Nên cân nhắc điều kiện tiên quyết, lịch mở lớp, tải học tập theo học kỳ.</li>
+        <li>Trang “Đồ thị học tập” giúp quan sát mối liên hệ giữa các môn đã học và môn được gợi ý.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

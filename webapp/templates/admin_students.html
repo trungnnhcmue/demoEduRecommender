@@ -1,0 +1,129 @@
+{% extends "base.html" %}
+{% block title %}Admin - Students{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='students.css') }}">
+{% endblock %}
+
+{% block top_actions %}
+<a class="btn btn-outline" href="{{ url_for('logout') }}">
+  <i class="fas fa-sign-out-alt"></i> Đăng xuất
+</a>
+{% endblock %}
+
+{% block content %}
+<div class="container card">
+  <h1><i class="fas fa-user-graduate"></i> Quản lý Sinh viên</h1>
+
+  <!-- Form thêm sinh viên -->
+  <form class="student-form" method="POST" action="{{ url_for('add_student') }}">
+    <input type="text" name="name" placeholder="Tên sinh viên" required>
+    <input type="text" name="major" placeholder="Ngành học" required>
+    <input type="number" name="year" min="1" max="4" placeholder="Năm học" required>
+    <button type="submit" class="btn btn-primary">
+      <i class="fas fa-plus-circle"></i> Thêm
+    </button>
+  </form>
+
+  <!-- Bảng danh sách sinh viên -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Ngành</th>
+        <th>Năm</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in students %}
+      <tr>
+        <td>{{ s.student_id }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.major }}</td>
+        <td>{{ s.year }}</td>
+        <td>
+          <a class="delete-btn" href="{{ url_for('delete_student', sid=s.student_id) }}">
+            <i class="fas fa-trash-alt"></i> Xóa
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <!-- Pagination bar -->
+<div class="pager">
+  <div class="pager__left">
+    <strong>Tổng:</strong> {{ total }} • <strong>Trang</strong> {{ page }}/{{ total_pages }}
+  </div>
+
+  <div class="pager__right">
+    <form method="GET" class="pager__perpage">
+      <label>Hiển thị:</label>
+      <select name="per_page" onchange="this.form.submit()">
+        {% for n in [10, 20, 30, 50, 100] %}
+          <option value="{{ n }}" {% if per_page == n %}selected{% endif %}>{{ n }}</option>
+        {% endfor %}
+      </select>
+      <!-- giữ trang khi đổi per_page: thường nên về trang 1 -->
+      <input type="hidden" name="page" value="1">
+      <!-- Nếu bạn có filter/search thì thêm hidden các param khác ở đây -->
+    </form>
+
+    <nav class="pager__nav" aria-label="Pagination">
+      <!-- Prev -->
+      {% if page > 1 %}
+        <a class="pg-btn" href="?page={{ page-1 }}&per_page={{ per_page }}">‹ Trước</a>
+      {% else %}
+        <span class="pg-btn is-disabled">‹ Trước</span>
+      {% endif %}
+
+      <!-- Page numbers (windowed) -->
+      {% set start = page - 2 %}
+      {% set end = page + 2 %}
+      {% if start < 1 %}{% set start = 1 %}{% endif %}
+      {% if end > total_pages %}{% set end = total_pages %}{% endif %}
+
+      {% if start > 1 %}
+        <a class="pg-num" href="?page=1&per_page={{ per_page }}">1</a>
+        {% if start > 2 %}
+          <span class="pg-ellipsis">…</span>
+        {% endif %}
+      {% endif %}
+
+      {% for p in range(start, end + 1) %}
+        {% if p == page %}
+          <span class="pg-num is-active">{{ p }}</span>
+        {% else %}
+          <a class="pg-num" href="?page={{ p }}&per_page={{ per_page }}">{{ p }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if end < total_pages %}
+        {% if end < total_pages - 1 %}
+          <span class="pg-ellipsis">…</span>
+        {% endif %}
+        <a class="pg-num" href="?page={{ total_pages }}&per_page={{ per_page }}">{{ total_pages }}</a>
+      {% endif %}
+
+      <!-- Next -->
+      {% if page < total_pages %}
+        <a class="pg-btn" href="?page={{ page+1 }}&per_page={{ per_page }}">Sau ›</a>
+      {% else %}
+        <span class="pg-btn is-disabled">Sau ›</span>
+      {% endif %}
+    </nav>
+  </div>
+</div>
+
+
+
+  <div style="margin-top:14px;">
+    <a class="btn btn-primary" href="{{ url_for('admin_dashboard') }}">
+      <i class="fas fa-arrow-left"></i> Quay lại
+    </a>
+  </div>
+</div>
+{% endblock %}

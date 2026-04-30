@@ -1,0 +1,36 @@
+/* Không đụng body display:flex nữa */
+body{
+  margin: 0;
+}
+
+/* Căn giữa nội dung trong main.page */
+.page{
+  min-height: calc(100vh - 120px);
+  display: flex;
+  justify-content: center;   /* căn giữa trái-phải */
+  align-items: center;       /* căn giữa trên-dưới */
+  padding: 24px;
+}
+
+/* Wrapper mà bạn đang dùng trong admin_dashboard.html */
+.center-page{ width: 100%; }
+.center-wrap{
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+}
+
+/* Các nút trong dashboard */
+.dashboard-links{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.dashboard-links .btn{
+  justify-content: flex-start;
+  padding: 14px 16px;
+  border-radius: 14px;
+  font-weight: 800;
+}

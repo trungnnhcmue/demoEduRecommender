@@ -1,0 +1,314 @@
+/* =======================
+   Body & Container
+======================= */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px 40px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* =======================
+   Headings
+======================= */
+h1 {
+    color: #4a90e2;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #333;
+    border-bottom: 2px solid #4a90e2;
+    padding-bottom: 5px;
+    margin-top: 30px;
+}
+
+/* =======================
+   Paragraphs
+======================= */
+p {
+    font-size: 16px;
+    margin: 5px 0 20px 0;
+}
+
+/* =======================
+   Table môn học
+======================= */
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.course-table th, .course-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.course-table th {
+    background-color: #4a90e2;
+    color: white;
+}
+
+.course-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.course-table tr:hover {
+    background-color: #e6f0fa;
+}
+
+/* =======================
+   Course list (recommendations)
+======================= */
+.course-list {
+    list-style-type: square;
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.course-list li {
+    padding: 5px 0;
+}
+
+/* =======================
+   Logout button
+======================= */
+a.logout-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 25px;
+    background-color: #4a90e2;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+a.logout-btn:hover {
+    background-color: #357ABD;
+}
+
+.btn-view-graph {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.btn-view-graph:hover {
+    background-color: #45a049;
+}
+
+/* ===== TABLE STYLE UPGRADE ===== */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+
+thead th {
+  background: linear-gradient(180deg, #f0f6ff, #e7f1ff);
+  color: var(--primary-2);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: .5px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody td {
+  padding: 14px 16px;
+  color: var(--text);
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr:nth-child(even) {
+  background: #fafcff;
+}
+
+tbody tr:hover {
+  background: var(--primary-soft);
+  transition: background .2s ease;
+}
+
+/* ===== BADGE / TAG ===== */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.badge.A { background:#e6f4ea; color:#137333; }
+.badge.B { background:#e8f0fe; color:#174ea6; }
+.badge.C { background:#fff4e5; color:#b06000; }
+.badge.D { background:#fdecea; color:#a50e0e; }
+.badge.F { background:#fce8e6; color:#a50e0e; }
+
+.tag {
+  background: var(--primary-soft);
+  color: var(--primary-2);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ===== FIX: Header/Body column alignment ===== */
+table thead th,
+table tbody td {
+  vertical-align: middle;
+}
+
+/* Cột 1: STT (canh trái hoặc giữa tuỳ bạn) */
+table thead th:nth-child(1),
+table tbody td:nth-child(1) {
+  text-align: left;
+  width: 90px;
+}
+
+/* Cột 2: Môn (trái) */
+table thead th:nth-child(2),
+table tbody td:nth-child(2) {
+  text-align: left;
+}
+
+/* Cột 3: Học kỳ (giữa) */
+table thead th:nth-child(3),
+table tbody td:nth-child(3) {
+  text-align: center;
+  width: 140px;
+}
+
+/* Cột 4: Điểm (giữa) */
+table thead th:nth-child(4),
+table tbody td:nth-child(4) {
+  text-align: center;
+  width: 140px;
+}
+
+/* Badge đứng đúng giữa cell */
+table tbody td:nth-child(4) .badge {
+  margin: 0 auto;
+}
+
+/* ===== BUTTONS (override) ===== */
+.actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.actions .btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 18px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  border:1px solid transparent;
+  line-height:1;
+  transition: all .2s ease;
+}
+
+/* Primary */
+.actions .btn-primary{
+  background:#2563eb;
+  color:#fff;
+}
+.actions .btn-primary:hover{
+  background:#1d4ed8;
+}
+
+/* Secondary */
+.actions .btn-secondary{
+  background: rgba(15,23,42,0.06);
+  color:#0f172a;
+  border-color: rgba(15,23,42,0.10);
+}
+.actions .btn-secondary:hover{
+  background: rgba(15,23,42,0.10);
+}
+
+/* Outline (đây là cái đang bị trắng/chìm) */
+.actions .btn-outline{
+  background: rgba(255,255,255,0.65);
+  color:#0f172a; /* chữ tối */
+  border-color: rgba(37,99,235,0.25);
+  box-shadow: 0 1px 0 rgba(15,23,42,.05);
+}
+.actions .btn-outline i{
+  color:#1e3a8a; /* icon xanh đậm */
+}
+.actions .btn-outline:hover{
+  background: rgba(255,255,255,0.90);
+  border-color: rgba(37,99,235,0.40);
+  transform: translateY(-1px);
+}
+
+/* --- FIX: ép header/footer về full width cho trang login --- */
+body.page-login {
+  margin: 0;
+}
+
+/* đảm bảo topbar/page/footer không bị margin-left/width lạ */
+body.page-login .topbar,
+body.page-login .page,
+body.page-login .footer {
+  width: 100% !important;
+  /* margin-left: 0 !important; */
+  left: 0 !important;
+  right: 0 !important;
+}
+
+/* nếu theme.css có layout kiểu flex/grid khiến header/footer thành 1 cột */
+body.page-login {
+  display: block !important;
+}
+
+body.page-login .page {
+  min-height: calc(100vh - 72px - 56px); /* chỉnh nếu topbar/footer khác */
+  display: block;
+}
+
+/* center nội dung login */
+body.page-login .login-wrap {
+  width: 100%;
+}
+
+/* Centered container helper */
+.center-page{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 14px;
+}
+.center-wrap{
+  width: 100%;
+  max-width: 1100px;
+}
+

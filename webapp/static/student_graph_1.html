@@ -1,0 +1,155 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 90%;
+                 height: 600px;
+                 background-color: #ffffff;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "green", "font": {"color": "black"}, "id": "course_36", "label": "Course_36", "shape": "dot", "size": 10, "title": "Course_36 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_8", "label": "Course_8", "shape": "dot", "size": 10, "title": "Course_8 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_21", "label": "Course_21", "shape": "dot", "size": 10, "title": "Course_21 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_16", "label": "Course_16", "shape": "dot", "size": 10, "title": "Course_16 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_1", "label": "Course_1", "shape": "dot", "size": 10, "title": "Course_1 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_30", "label": "Course_30", "shape": "dot", "size": 10, "title": "Course_30 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_14", "label": "Course_14", "shape": "dot", "size": 10, "title": "Course_14 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_19", "label": "Course_19", "shape": "dot", "size": 10, "title": "Course_19 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_40", "label": "Course_40", "shape": "dot", "size": 10, "title": "Course_40 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_15", "label": "Course_15", "shape": "dot", "size": 10, "title": "Course_15 (course)"}, {"color": "blue", "font": {"color": "black"}, "id": "student_1", "label": "Student_1", "shape": "dot", "size": 15, "title": "Student_1 (student)"}, {"color": "green", "font": {"color": "black"}, "id": "course_31", "label": "Course_31", "shape": "dot", "size": 10, "title": "Course_31 (course)"}, {"color": "red", "font": {"color": "black"}, "id": "major_Biology", "label": "Biology", "shape": "dot", "size": 10, "title": "Biology (major)"}, {"color": "green", "font": {"color": "black"}, "id": "course_6", "label": "Course_6", "shape": "dot", "size": 10, "title": "Course_6 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_12", "label": "Course_12", "shape": "dot", "size": 10, "title": "Course_12 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_17", "label": "Course_17", "shape": "dot", "size": 10, "title": "Course_17 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_20", "label": "Course_20", "shape": "dot", "size": 10, "title": "Course_20 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_11", "label": "Course_11", "shape": "dot", "size": 10, "title": "Course_11 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_49", "label": "Course_49", "shape": "dot", "size": 10, "title": "Course_49 (course)"}, {"color": "green", "font": {"color": "black"}, "id": "course_2", "label": "Course_2", "shape": "dot", "size": 10, "title": "Course_2 (course)"}]);
+                  edges = new vis.DataSet([{"from": "course_36", "label": "prerequisite", "to": "course_21", "width": 1}, {"from": "course_36", "label": "enrolled_in", "to": "student_1", "width": 1}, {"from": "course_8", "label": "prerequisite", "to": "course_20", "width": 1}, {"from": "course_8", "label": "enrolled_in", "to": "student_1", "width": 1}, {"from": "course_8", "label": "belongs_to_major", "to": "major_Biology", "width": 1}, {"from": "course_21", "label": "enrolled_in", "to": "student_1", "width": 1}, {"from": "course_21", "label": "belongs_to_major", "to": "major_Biology", "width": 1}, {"from": "course_16", "label": "enrolled_in", "to": "student_1", "width": 1}, {"from": "course_16", "label": "belongs_to_major", "to": "major_Biology", "width": 1}, {"from": "course_1", "label": "prerequisite", "to": "course_15", "width": 1}, {"from": "course_1", "label": "prerequisite", "to": "course_31", "width": 1}, {"from": "course_30", "label": "enrolled_in", "to": "student_1", "width": 1}, {"from": "course_14", "label": "belongs_to_major", "to": "major_Biology", "width": 1}, {"from": "course_19", "label": "enrolled_in", "to": "student_1", "width": 1}, {"from": "course_40", "label": "prerequisite", "to": "course_17", "width": 1}, {"from": "course_40", "label": "enrolled_in", "to": "student_1", "width": 1}, {"from": "course_40", "label": "belongs_to_major", "to": "major_Biology", "width": 1}, {"from": "course_15", "label": "enrolled_in", "to": "student_1", "width": 1}, {"from": "student_1", "label": "enrolled_in", "to": "course_2", "width": 1}, {"from": "student_1", "label": "enrolled_in", "to": "course_6", "width": 1}, {"from": "student_1", "label": "enrolled_in", "to": "course_31", "width": 1}, {"from": "student_1", "label": "enrolled_in", "to": "course_12", "width": 1}, {"from": "student_1", "label": "enrolled_in", "to": "course_49", "width": 1}, {"from": "student_1", "label": "enrolled_in", "to": "course_11", "width": 1}, {"from": "student_1", "label": "enrolled_in", "to": "course_17", "width": 1}, {"from": "student_1", "label": "has_major", "to": "major_Biology", "width": 1}, {"from": "course_31", "label": "belongs_to_major", "to": "major_Biology", "width": 1}, {"from": "major_Biology", "label": "belongs_to_major", "to": "course_12", "width": 1}, {"from": "major_Biology", "label": "belongs_to_major", "to": "course_17", "width": 1}, {"from": "major_Biology", "label": "belongs_to_major", "to": "course_49", "width": 1}, {"from": "course_12", "label": "prerequisite", "to": "course_17", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

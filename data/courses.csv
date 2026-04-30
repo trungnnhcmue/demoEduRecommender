@@ -1,0 +1,51 @@
+﻿course_id,course_name,major,credits,prerequisite
+1,TOA101 - Giải tích 1,Sư phạm Toán (HCMUE),4,
+2,TOA102 - Đại số tuyến tính,Sư phạm Toán (HCMUE),3,
+3,TOA103 - Logic & Tập hợp,Sư phạm Toán (HCMUE),2,
+4,PED101 - Tâm lý học đại cương,Sư phạm Toán (HCMUE),2,
+5,PED102 - Giáo dục học đại cương,Sư phạm Toán (HCMUE),2,
+6,GEN101 - Tin học cơ sở,Sư phạm Toán (HCMUE),2,
+7,TOA201 - Giải tích 2,Sư phạm Toán (HCMUE),4,1.0
+8,TOA202 - Đại số tuyến tính nâng cao,Sư phạm Toán (HCMUE),3,2.0
+9,TOA203 - Hình học giải tích,Sư phạm Toán (HCMUE),3,2.0
+10,GEN201 - Xác suất & Thống kê 1,Sư phạm Toán (HCMUE),3,
+11,PED201 - Kỹ năng học đại học & nghiên cứu,Sư phạm Toán (HCMUE),2,
+12,GEN202 - Anh văn học thuật 1,Sư phạm Toán (HCMUE),2,
+13,TOA301 - Phương trình vi phân,Sư phạm Toán (HCMUE),3,1.0
+14,TOA302 - Giải tích nhiều biến,Sư phạm Toán (HCMUE),3,7.0
+15,TOA303 - Đại số trừu tượng 1,Sư phạm Toán (HCMUE),3,2.0
+16,TOA304 - Lý thuyết số cơ bản,Sư phạm Toán (HCMUE),3,3.0
+17,PED301 - Tâm lý học sư phạm,Sư phạm Toán (HCMUE),2,4.0
+18,GEN301 - Anh văn học thuật 2,Sư phạm Toán (HCMUE),2,12.0
+19,TOA401 - Giải tích phức,Sư phạm Toán (HCMUE),3,7.0
+20,TOA402 - Đại số trừu tượng 2,Sư phạm Toán (HCMUE),3,15.0
+21,TOA403 - Hình học vi phân cơ bản,Sư phạm Toán (HCMUE),3,9.0
+22,TOA404 - Xác suất & Thống kê 2,Sư phạm Toán (HCMUE),3,10.0
+23,PED401 - Phương pháp nghiên cứu KHGD,Sư phạm Toán (HCMUE),2,5.0
+24,PED402 - Đo lường & đánh giá trong giáo dục,Sư phạm Toán (HCMUE),2,21.0
+25,DID501 - PPDH Toán 1 (Lý luận dạy học),Sư phạm Toán (HCMUE),3,5.0
+26,DID502 - PPDH Toán 2 (Thiết kế bài học),Sư phạm Toán (HCMUE),3,25.0
+27,DID503 - CNTT trong dạy học Toán,Sư phạm Toán (HCMUE),2,6.0
+28,TOA501 - Tối ưu hóa cơ bản,Sư phạm Toán (HCMUE),3,10.0
+29,TOA502 - Toán rời rạc nâng cao,Sư phạm Toán (HCMUE),3,3.0
+30,GEN501 - Kỹ năng thuyết trình & giao tiếp,Sư phạm Toán (HCMUE),2,
+31,DID601 - Thực hành sư phạm 1 (Microteaching),Sư phạm Toán (HCMUE),2,26.0
+32,DID602 - Phát triển chương trình môn Toán,Sư phạm Toán (HCMUE),2,26.0
+33,DID603 - Giáo dục STEM trong dạy học Toán,Sư phạm Toán (HCMUE),2,26.0
+34,TOA601 - Thống kê ứng dụng trong giáo dục,Sư phạm Toán (HCMUE),3,22.0
+35,TOA602 - Mô hình toán học,Sư phạm Toán (HCMUE),3,28.0
+36,GEN601 - Pháp luật đại cương,Sư phạm Toán (HCMUE),2,
+37,DID701 - Thực tập sư phạm 2,Sư phạm Toán (HCMUE),4,31.0
+38,DID702 - Quản lý lớp học & công tác chủ nhiệm,Sư phạm Toán (HCMUE),2,31.0
+39,DID703 - Đánh giá năng lực Toán học,Sư phạm Toán (HCMUE),2,24.0
+40,TOA701 - Chuyên đề Toán hiện đại,Sư phạm Toán (HCMUE),3,20.0
+41,TOA702 - Ứng dụng Toán trong khoa học dữ liệu,Sư phạm Toán (HCMUE),3,10.0
+42,GEN701 - Khởi nghiệp & đổi mới sáng tạo,Sư phạm Toán (HCMUE),2,
+43,THS801 - Khóa luận/Đề tài tốt nghiệp,Sư phạm Toán (HCMUE),6,37.0
+44,DID801 - Seminar phương pháp dạy học Toán,Sư phạm Toán (HCMUE),2,26.0
+45,DID802 - Ứng dụng công nghệ giáo dục,Sư phạm Toán (HCMUE),2,27.0
+46,GEN801 - Giáo dục hòa nhập,Sư phạm Toán (HCMUE),2,5.0
+47,GEN802 - Kỹ năng nghề nghiệp sư phạm,Sư phạm Toán (HCMUE),2,31.0
+48,GEN803 - Chuyên đề tự chọn (Toán/PPDH),Sư phạm Toán (HCMUE),2,
+49,ELE049 - Học phần tự chọn 49,Sư phạm Toán (HCMUE),2,
+50,ELE050 - Học phần tự chọn 50,Sư phạm Toán (HCMUE),2,

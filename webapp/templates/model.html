@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% block title %}Mô hình FTPComplex{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+  .hero-mini{
+    padding: 18px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff, var(--primary-soft));
+    border: 1px solid var(--border);
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:14px;
+    margin-top:14px;
+  }
+  .col-6{ grid-column: span 6; }
+  .col-12{ grid-column: span 12; }
+  @media(max-width:900px){
+    .col-6{ grid-column: span 12; }
+  }
+
+  .box{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:14px;
+    background:#fff;
+  }
+
+  .step{
+    display:flex; gap:12px; align-items:flex-start;
+    padding:12px; border-radius:14px;
+    border:1px solid var(--border);
+    background:#fff;
+    margin-top:10px;
+  }
+  .step .icon{
+    width:36px;height:36px;border-radius:50%;
+    background:var(--primary-soft);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--primary);
+    flex:0 0 36px;
+  }
+  .muted{ color: var(--muted); }
+
+  code{
+    background: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 8px;
+  }
+
+  .note{
+    border-left:4px solid var(--primary);
+    padding:12px;
+    background:#fff;
+    border-radius:12px;
+    border:1px solid var(--border);
+    margin-top:12px;
+  }
+</style>
+{% endblock %}
+
+{% block top_actions %}
+<a class="btn btn-outline" href="{{ url_for('student_dashboard') }}">
+  <i class="fas fa-arrow-left"></i> Quay lại
+</a>
+{% endblock %}
+
+{% block content %}
+
+<section class="card hero-mini">
+  <h1 style="margin:0 0 8px 0;">
+    <i class="fas fa-brain"></i> Mô hình FTPComplex (FTPComplEx)
+  </h1>
+  <p class="muted" style="margin:0;">
+    Trang này mô tả ngắn gọn mô hình được áp dụng trong hệ thống gợi ý khóa học.
+    Tên trong bài báo là <strong>FTPComplEx</strong>; trong hệ thống bạn đang triển khai có thể gọi là <strong>FTPComplex</strong>.
+  </p>
+</section>
+
+<div class="grid">
+  <section class="card col-6">
+    <h2 style="margin:0 0 10px 0;"><i class="fas fa-bullseye"></i> Bài toán & động cơ</h2>
+    <div class="box">
+      <p class="muted" style="margin:0;">
+        Dữ liệu học tập có tính <strong>thời gian</strong> (học kỳ/năm học), mối quan hệ sinh viên–môn học thay đổi theo tiến trình.
+        Vì vậy cần một mô hình có thể biểu diễn và suy luận trong bối cảnh thời gian thay đổi.
+      </p>
+      <div class="note">
+        <strong>Ý tưởng cốt lõi:</strong> đưa “góc nhìn thời gian” vào embedding để gợi ý phù hợp hơn theo tiến trình học tập.
+      </div>
+    </div>
+  </section>
+
+  <section class="card col-6">
+    <h2 style="margin:0 0 10px 0;"><i class="fas fa-cubes"></i> FTPComplEx là gì?</h2>
+    <div class="box">
+      <ul class="muted" style="margin:0; padding-left:18px;">
+        <li>Một phương pháp nhúng đồ thị tri thức theo thời gian (temporal knowledge graph completion).</li>
+        <li>Mở rộng hướng tiếp cận embedding trong không gian phức (ComplEx) bằng cách tích hợp thành phần thời gian.</li>
+        <li>Cho phép <strong>điều chỉnh linh hoạt</strong> mức độ ảnh hưởng của thời gian (Flexible Time Perspective).</li>
+      </ul>
+      <p class="muted" style="margin:10px 0 0 0;">
+        Trong hệ thống gợi ý khóa học, ta có thể xem các tương tác như các “sự kiện theo thời gian”
+        để mô hình học embedding phù hợp theo học kỳ/năm học.
+      </p>
+    </div>
+  </section>
+
+  <section class="card col-12">
+    <h2 style="margin:0 0 10px 0;"><i class="fas fa-diagram-project"></i> Quy trình áp dụng trong hệ thống gợi ý</h2>
+
+    <div class="step">
+      <div class="icon"><i class="fas fa-database"></i></div>
+      <div>
+        <strong>Bước 1 — Chuẩn hóa dữ liệu theo thời gian</strong>
+        <div class="muted">
+          Biểu diễn lịch sử đăng ký/học của sinh viên theo từng học kỳ (time slice), tạo các quan hệ/sự kiện dạng:
+          <code>(student, enroll, course, semester)</code>.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon"><i class="fas fa-gear"></i></div>
+      <div>
+        <strong>Bước 2 — Huấn luyện FTPComplex (FTPComplEx)</strong>
+        <div class="muted">
+          Mô hình học embedding cho sinh viên, môn học và thời gian; các trọng số thời gian giúp điều tiết mức ảnh hưởng của “gần/xa” theo học kỳ.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="icon"><i class="fas fa-wand-magic-sparkles"></i></div>
+      <div>
+        <strong>Bước 3 — Sinh gợi ý Top-K & trực quan hóa</strong>
+        <div class="muted">
+          Tính điểm phù hợp cho các môn chưa học, chọn Top-K, hiển thị danh sách và cung cấp đồ thị học tập để hỗ trợ diễn giải.
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Điểm nhấn:</strong> so với mô hình tĩnh, FTPComplex nhấn mạnh tính “đúng tiến trình” nhờ đưa học kỳ/năm học vào biểu diễn.
+    </div>
+  </section>
+
+  <section class="card col-12">
+    <h2 style="margin:0 0 10px 0;"><i class="fas fa-quote-left"></i> Nguồn tham khảo</h2>
+    <div class="box">
+      <p class="muted" style="margin:0;">
+        “FTPComplEx: A flexible time perspective approach to temporal knowledge graph completion”.
+      </p>
+    </div>
+
+    <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+      <a class="btn btn-primary" href="{{ url_for('explain_page') }}">
+        <i class="fas fa-circle-question"></i> Xem trang giải thích gợi ý
+      </a>
+      <a class="btn btn-secondary" href="{{ url_for('student_graph') }}">
+        <i class="fas fa-chart-network"></i> Xem đồ thị học tập
+      </a>
+    </div>
+  </section>
+</div>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+1. Cài đặt python3.10
+2. Tạo môi trường ảo venv
+3. Cài đặt requirements
+4. python run.py để chạy
+5. Vào browser để mở local

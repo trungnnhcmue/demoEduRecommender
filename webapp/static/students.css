@@ -1,0 +1,228 @@
+/* 1) Tuyệt đối không biến body thành flex */
+body{
+  margin: 0;
+}
+
+/* 2) Căn giữa nội dung trong main.page, không đụng header/footer */
+.page{
+  min-height: calc(100vh - 120px); /* xấp xỉ header+footer */
+  display: flex;
+  justify-content: center;   /* căn giữa ngang */
+  align-items: flex-start;   /* để form + bảng nằm phía trên, dễ nhìn */
+  padding: 24px;
+}
+
+/* 3) Container nội dung */
+.container{
+  width: 100%;
+  max-width: 980px;
+}
+
+/* 4) Form thêm sinh viên */
+.student-form{
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr auto;
+  gap: 10px;
+  margin: 14px 0 14px 0;
+}
+
+.student-form input{
+  padding: 12px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border, #d7dde6);
+  background: #fff;
+  outline: none;
+}
+
+.student-form input:focus{
+  border-color: var(--primary, #0b5ed7);
+  box-shadow: 0 0 0 3px rgba(11,94,215,0.18);
+}
+
+@media (max-width: 900px){
+  .student-form{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* 5) Table đẹp + không lệch */
+table{
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+thead th{
+  background: rgba(11,94,215,.10);
+  text-align: left;
+  font-weight: 800;
+  color: #0b3d91;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border, #d7dde6);
+}
+
+tbody td{
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  vertical-align: middle;
+}
+
+tbody tr:hover{
+  background: rgba(11,94,215,.05);
+}
+
+/* 6) Nút xóa */
+.delete-btn{
+  color: #dc2626;
+  font-weight: 800;
+  text-decoration: none;
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.delete-btn:hover{
+  text-decoration: underline;
+}
+
+.pagination{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+
+.page-info{
+  color: var(--muted, #6b7280);
+  font-weight: 600;
+}
+
+.page-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.page-actions a{
+  text-decoration:none;
+}
+
+.page-actions .btn{
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.page-actions .btn.disabled{
+  pointer-events:none;
+  opacity:.5;
+}
+
+.per-page{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color: var(--muted, #6b7280);
+  font-weight: 600;
+}
+
+.per-page select{
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #d7dde6);
+  background: #fff;
+}
+
+.pager{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:14px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+}
+
+.pager__left{
+  color:var(--muted);
+  font-weight:600;
+}
+
+.pager__right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.pager__perpage{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.pager__perpage select{
+  padding:8px 10px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  font-weight:700;
+}
+
+.pager__nav{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.pg-btn, .pg-num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:38px;
+  min-width:38px;
+  padding:0 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  text-decoration:none;
+  font-weight:800;
+  color:var(--text);
+}
+
+.pg-num{ padding:0 14px; }
+
+.pg-btn:hover, .pg-num:hover{
+  border-color: rgba(11,94,215,.35);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+
+.pg-num.is-active{
+  background: var(--primary);
+  border-color: var(--primary);
+  color:#fff;
+}
+
+.pg-btn.is-disabled{
+  opacity:.45;
+  pointer-events:none;
+}
+
+.pg-ellipsis{
+  color:var(--muted);
+  font-weight:800;
+  padding:0 4px;
+}
+
+@media (max-width: 720px){
+  .pager{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+

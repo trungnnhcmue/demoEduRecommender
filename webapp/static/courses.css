@@ -1,0 +1,252 @@
+/* KHÔNG can thiệp body để tránh lệch header/footer */
+body{
+  margin: 0;
+  padding: 0;
+  background: transparent; /* nền đã do theme.css quản */
+  font-family: inherit;    /* dùng font của theme.css */
+}
+
+/* Căn giữa và tạo khoảng thở trong main */
+.page{
+  padding: 24px;
+  display: flex;
+  justify-content: center;  /* căn giữa ngang */
+  align-items: flex-start;  /* nội dung nằm từ trên xuống */
+}
+
+/* Nội dung trang */
+.container{
+  width: 100%;
+  max-width: 980px;
+}
+
+/* Card theo theme (nếu theme.css đã có .card thì phần này chỉ bổ sung nhẹ) */
+.card{
+  background: #fff;
+  padding: 20px;
+  margin: 0 0 16px 0;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Form */
+.form-inline{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 12px 0;
+}
+
+.form-inline input{
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d7dde6;
+  flex: 1;
+  background: #fff;
+  outline: none;
+}
+
+.form-inline input:focus{
+  border-color: var(--primary, #0b5ed7);
+  box-shadow: 0 0 0 3px rgba(11,94,215,0.18);
+}
+
+/* Table */
+.styled-table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.styled-table th,
+.styled-table td{
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.styled-table th{
+  background: rgba(11,94,215,.10);
+  color: #0b3d91;
+  font-weight: 800;
+}
+
+.styled-table tr:hover{
+  background: rgba(11,94,215,.05);
+}
+
+/* Buttons: ưu tiên dùng .btn của theme.css nếu có.
+   Nếu bạn đang dùng .btn-primary/.btn-danger riêng, giữ lại: */
+.btn-primary, .btn-secondary, .btn-danger{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.2s;
+  border: 0;
+}
+
+.btn-primary{
+  background: var(--primary, #0b5ed7);
+  color: #fff;
+}
+.btn-primary:hover{ filter: brightness(0.95); }
+
+.btn-secondary{
+  background: #9aa4b2;
+  color: #fff;
+}
+.btn-secondary:hover{ filter: brightness(0.95); }
+
+.btn-danger{
+  background: #e74c3c;
+  color: #fff;
+}
+.btn-danger:hover{ filter: brightness(0.95); }
+
+.pagination{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:16px;
+  flex-wrap:wrap;
+}
+
+.page-info{
+  color: var(--muted, #6b7280);
+  font-weight: 600;
+}
+
+.page-actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.page-actions a{
+  text-decoration:none;
+}
+
+.page-actions .btn{
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.page-actions .btn.disabled{
+  pointer-events:none;
+  opacity:.5;
+}
+
+.per-page{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  color: var(--muted, #6b7280);
+  font-weight: 600;
+}
+
+.per-page select{
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #d7dde6);
+  background: #fff;
+}
+
+.pager{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:14px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+}
+
+.pager__left{
+  color:var(--muted);
+  font-weight:600;
+}
+
+.pager__right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.pager__perpage{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.pager__perpage select{
+  padding:8px 10px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  font-weight:700;
+}
+
+.pager__nav{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.pg-btn, .pg-num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:38px;
+  min-width:38px;
+  padding:0 12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:#fff;
+  text-decoration:none;
+  font-weight:800;
+  color:var(--text);
+}
+
+.pg-num{ padding:0 14px; }
+
+.pg-btn:hover, .pg-num:hover{
+  border-color: rgba(11,94,215,.35);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+
+.pg-num.is-active{
+  background: var(--primary);
+  border-color: var(--primary);
+  color:#fff;
+}
+
+.pg-btn.is-disabled{
+  opacity:.45;
+  pointer-events:none;
+}
+
+.pg-ellipsis{
+  color:var(--muted);
+  font-weight:800;
+  padding:0 4px;
+}
+
+@media (max-width: 720px){
+  .pager{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}

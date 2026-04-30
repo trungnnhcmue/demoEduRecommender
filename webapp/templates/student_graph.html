@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+{% block title %}Đồ thị học tập{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+  .hero-mini{
+    padding: 18px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, #ffffff, var(--primary-soft));
+    border: 1px solid var(--border);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(12,1fr);
+    gap:14px;
+    margin-top:14px;
+  }
+  .col-8{ grid-column: span 8; }
+  .col-4{ grid-column: span 4; }
+  .col-12{ grid-column: span 12; }
+  @media(max-width: 900px){
+    .col-8,.col-4{ grid-column: span 12; }
+  }
+
+  .pill{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--border);
+    font-weight:600;
+    color:var(--primary-2);
+  }
+
+  .legend{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:8px;
+  }
+  .legend-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:#fff;
+  }
+  .dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    flex:0 0 12px;
+  }
+  .dot.student{ background: #0b5ed7; }
+  .dot.course{ background: #16a34a; }
+  .dot.prereq{ background: #f59e0b; }
+  .line{
+    height:2px;
+    width:34px;
+    border-radius:999px;
+    background:#2563eb;
+  }
+  .line.prereq{ background:#16a34a; }
+  .muted{ color: var(--muted); }
+
+  .kpi{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px;
+    border-radius:14px;
+    background:#fff;
+    border:1px solid var(--border);
+    margin-top:10px;
+  }
+  .kpi .value{
+    font-size:28px;
+    font-weight:800;
+  }
+
+  .iframe-wrap{
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    background:#fff;
+  }
+  iframe{
+    display:block;
+    width:100%;
+    height:820px;
+    border:none;
+  }
+
+  .note{
+    border-left:4px solid var(--primary);
+    padding:12px;
+    background:#fff;
+    border-radius:12px;
+    border:1px solid var(--border);
+  }
+
+  .btn-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+  }
+</style>
+{% endblock %}
+
+{% block top_actions %}
+<a class="btn btn-outline" href="{{ url_for('student_dashboard') }}">
+  <i class="fas fa-arrow-left"></i> Quay lại
+</a>
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="card hero-mini">
+  <h1 style="margin:0 0 8px 0;">
+    <i class="fas fa-chart-network"></i> Đồ thị học tập của bạn
+  </h1>
+  <p class="muted" style="margin:0;">
+    Đồ thị thể hiện mối liên hệ giữa <strong>sinh viên</strong> và <strong>các môn học</strong>,
+    đồng thời mô tả các quan hệ <strong>enrolled_in</strong> (đã đăng ký/học)
+    và <strong>prerequisite</strong> (tiên quyết). Thông tin này hỗ trợ giải thích gợi ý môn học theo FTPComplex.
+  </p>
+
+  <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+    {% if student is defined %}
+      <span class="pill"><i class="fas fa-user-graduate"></i> {{ student.name }}</span>
+      <span class="pill"><i class="fas fa-layer-group"></i> Ngành: {{ student.major }}</span>
+      <span class="pill"><i class="fas fa-calendar"></i> Năm: {{ student.year }}</span>
+    {% else %}
+      <span class="pill"><i class="fas fa-circle-info"></i> Bạn có thể phóng to/thu nhỏ và kéo thả để khám phá đồ thị.</span>
+    {% endif %}
+  </div>
+</section>
+
+<div class="grid">
+  <!-- GRAPH -->
+  <section class="card col-8">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+      <h2 style="margin:0;"><i class="fas fa-diagram-project"></i> Khám phá đồ thị</h2>
+      <div class="btn-row" style="margin-top:0;">
+        <a class="btn btn-secondary" href="{{ url_for('explain_page') }}">
+          <i class="fas fa-circle-question"></i> Giải thích gợi ý
+        </a>
+        <a class="btn btn-outline" href="{{ url_for('model_page') }}">
+          <i class="fas fa-brain"></i> Mô hình FTPComplex
+        </a>
+      </div>
+    </div>
+
+    <div class="iframe-wrap" style="margin-top:12px;">
+      <iframe src="{{ url_for('static', filename=graph_file) }}"></iframe>
+    </div>
+
+    <div class="note" style="margin-top:12px;">
+      <strong>Mẹo thao tác:</strong>
+      Kéo chuột để di chuyển, lăn chuột để zoom, bấm vào nút/điểm để xem nhãn.
+      Nếu đồ thị quá rối, hãy zoom nhỏ và tập trung theo từng cụm môn liên quan.
+    </div>
+  </section>
+
+  <!-- SIDEBAR -->
+  <aside class="card col-4">
+    <h2 style="margin:0 0 8px 0;"><i class="fas fa-compass"></i> Chú giải & cách đọc</h2>
+    <p class="muted" style="margin:0;">
+      Màu sắc/đường nối giúp bạn phân biệt loại nút và quan hệ trong đồ thị.
+    </p>
+
+    <div class="legend">
+      <div class="legend-item">
+        <span class="dot student"></span>
+        <div>
+          <strong>Sinh viên</strong>
+          <div class="muted">Nút trung tâm (student)</div>
+        </div>
+      </div>
+
+      <div class="legend-item">
+        <span class="dot course"></span>
+        <div>
+          <strong>Môn học</strong>
+          <div class="muted">Các course đã học/được liên kết</div>
+        </div>
+      </div>
+
+      <div class="legend-item">
+        <span class="line"></span>
+        <div>
+          <strong>enrolled_in</strong>
+          <div class="muted">Quan hệ SV ↔ môn đã học/đăng ký</div>
+        </div>
+      </div>
+
+      <div class="legend-item">
+        <span class="line prereq"></span>
+        <div>
+          <strong>prerequisite</strong>
+          <div class="muted">Quan hệ môn tiên quyết</div>
+        </div>
+      </div>
+    </div>
+
+    {% if graph_stats is defined %}
+      <div class="kpi">
+        <div>
+          <div class="muted">Số nút (nodes)</div>
+          <div class="value">{{ graph_stats.nodes }}</div>
+        </div>
+        <i class="fas fa-circle-nodes fa-2x" style="color:var(--primary);"></i>
+      </div>
+
+      <div class="kpi">
+        <div>
+          <div class="muted">Số cạnh (edges)</div>
+          <div class="value">{{ graph_stats.edges }}</div>
+        </div>
+        <i class="fas fa-share-nodes fa-2x" style="color:var(--primary);"></i>
+      </div>
+    {% else %}
+      <div class="kpi">
+        <div>
+          <div class="muted">Mục đích</div>
+          <div class="value" style="font-size:18px;font-weight:800;">Minh bạch</div>
+        </div>
+        <i class="fas fa-shield-halved fa-2x" style="color:var(--primary);"></i>
+      </div>
+      
+    {% endif %}
+
+    <div class="btn-row">
+      <a class="btn btn-primary" href="{{ url_for('student_dashboard') }}">
+        <i class="fas fa-arrow-left"></i> Quay lại trang sinh viên
+      </a>
+    </div>
+  </aside>
+</div>
+
+{% endblock %}
